@@ -1,0 +1,9 @@
+version: 2.1
+
+description: >
+  Run load tests and reliability tests using k6. This orb allows for running tests
+  both locally on the runner and in the k6 cloud SaaS service.
+
+display:
+  home_url: https://k6.io
+  source_url: https://github.com/k6io/circleci-orb

@@ -1,0 +1,38 @@
+description: >
+  Run a k6 test
+
+parallelism: 1
+docker: 
+  - image: loadimpact/k6:latest
+parameters:
+  arguments:
+    type: string
+    default: ''
+  script:
+    type: string
+    default: "script.js"
+  cloud:
+    description: >
+      To run in the k6 cloud, provide your k6 cloud token as a secret to the input `token`.
+      Dont have a k6 account yet? Go to https://k6.io/cloud and activate your free trial.
+    type: boolean
+    default: false
+  token:
+    type: string
+    default: ''
+environment:
+  K6_CLOUD_TOKEN: <<parameters.token>>
+steps:
+  - when:
+      condition: <<parameters.cloud>>
+      steps:
+        - run:
+            name: Execute cloud test
+            command: >
+              k6 cloud << parameters.script >> <<  parameters.arguments >>
+  - unless:
+      condition: <<parameters.cloud>>
+      steps:
+        - run:
+            name: Local Execution
+            command: k6 run << parameters.script >> << parameters.arguments >>
