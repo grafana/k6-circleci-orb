@@ -37,7 +37,7 @@ workflows:
       #    dir: ./src/scripts
       #    exclude: SC2148
       - orb-tools/publish-dev:
-          orb-name: k6/test
+          orb-name: k6io/test
           context: orb-publishing
           requires:
             - orb-tools/lint
