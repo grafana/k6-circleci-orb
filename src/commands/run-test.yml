@@ -6,7 +6,7 @@ parameters:
     default: ""
   script:
     type: string
-    default: ""
+    default: "test.js"
   cloud:
     type: boolean
     default: false
