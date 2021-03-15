@@ -38,7 +38,7 @@ workflows:
           exclude: SC2148
       - orb-tools/publish-dev:
           orb-name: k6/test
-          context: <publishing-context> # A restricted context containing your private publishing credentials. Will only execute if approved by an authorized user.
+          context: circleci-orb-publishing-context
           requires:
             - orb-tools/lint
             - orb-tools/pack
@@ -46,7 +46,7 @@ workflows:
             - shellcheck/check
       - orb-tools/trigger-integration-tests-workflow:
           name: trigger-integration-dev
-          context: <publishing-context>
+          context: circleci-orb-publishing-context
           requires:
             - orb-tools/publish-dev
 
@@ -55,8 +55,8 @@ workflows:
     jobs:
       - integration-test-1
       - orb-tools/dev-promote-prod-from-commit-subject:
-          orb-name: k6/test
-          context: <publishing-context>
+          orb-name: k6io/test
+          context: circleci-orb-publishing-context
           add-pr-comment: false
           fail-if-semver-not-indicated: true
           publish-version-tag: false
