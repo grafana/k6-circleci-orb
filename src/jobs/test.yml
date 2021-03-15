@@ -2,13 +2,18 @@ description: >
   Run a k6 test
 
 parallelism: 1
-docker: 
+docker:
   - image: loadimpact/k6:latest
 parameters:
   arguments:
+    description: >
+      Any command-line arguments, or flags, that you would like to pass on to k6.
+      For a full list of options, see https://k6.io/docs/using-k6/options.
     type: string
     default: ''
   script:
+    description: >
+      The path to your test script, relative to the current working directory
     type: string
     default: "script.js"
   cloud:
@@ -18,21 +23,14 @@ parameters:
     type: boolean
     default: false
   token:
+    description: >
+      The API token used to run in the k6 cloud.
+      You can find yours at https://app.k6.io/account/api-token.
     type: string
     default: ''
-environment:
-  K6_CLOUD_TOKEN: <<parameters.token>>
 steps:
-  - when:
-      condition: <<parameters.cloud>>
-      steps:
-        - run:
-            name: Execute cloud test
-            command: >
-              k6 cloud << parameters.script >> <<  parameters.arguments >>
-  - unless:
-      condition: <<parameters.cloud>>
-      steps:
-        - run:
-            name: Local Execution
-            command: k6 run << parameters.script >> << parameters.arguments >>
+  - run-test:
+      arguments: <<parameters.arguments>>
+      script: <<parameters.script>>
+      cloud: <<parameters.cloud>>
+      token: <<parameters.token>>

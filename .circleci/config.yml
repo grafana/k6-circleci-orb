@@ -25,7 +25,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      - k6/test
+      - k6/run-test
 
 workflows:
   test-pack:
@@ -42,7 +42,6 @@ workflows:
           requires:
             - orb-tools/lint
             - orb-tools/pack
-            - bats/run
             - shellcheck/check
       - orb-tools/trigger-integration-tests-workflow:
           name: trigger-integration-dev

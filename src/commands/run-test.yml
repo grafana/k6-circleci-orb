@@ -1,0 +1,31 @@
+description: >
+  This command should not be used directly. Instead, use the test job.
+parameters:
+  arguments:
+    type: string
+    default: ""
+  script:
+    type: string
+    default: ""
+  cloud:
+    type: boolean
+    default: false
+  token:
+    type: string
+    default: ""
+steps:
+  - when:
+      condition: <<parameters.cloud>>
+      steps:
+        - run:
+            name: Execute cloud test
+            command: >
+              k6 cloud << parameters.script >> <<  parameters.arguments >>
+            environment:
+              K6_CLOUD_TOKEN: <<parameters.token>>
+  - unless:
+      condition: <<parameters.cloud>>
+      steps:
+        - run:
+            name: Local Execution
+            command: k6 run << parameters.script >> << parameters.arguments >>
