@@ -16,6 +16,8 @@ parameters:
 steps:
   - when:
       condition: <<parameters.cloud>>
+      docker:
+        - image: loadimpact/k6:latest
       steps:
         - run:
             name: Execute cloud test
@@ -25,6 +27,8 @@ steps:
               K6_CLOUD_TOKEN: <<parameters.token>>
   - unless:
       condition: <<parameters.cloud>>
+      docker:
+        - image: loadimpact/k6:latest
       steps:
         - run:
             name: Local Execution

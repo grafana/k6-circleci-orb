@@ -1,7 +1,5 @@
 description: >
   Run a k6 test
-
-parallelism: 1
 docker:
   - image: loadimpact/k6:latest
 parameters:
