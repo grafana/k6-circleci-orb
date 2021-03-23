@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  k6io: k6io/test@dev:alpha
+  k6io: k6io/test@<< pipeline.parameters.dev-orb-version >>
   orb-tools: circleci/orb-tools@10.0
   # bats: circleci/bats@1.0
   # shellcheck: circleci/shellcheck@2.0
@@ -18,14 +18,6 @@ parameters:
       A "dev:alpha" version must exist for the initial pipeline run.
     type: string
     default: "dev:alpha"
-
-jobs:
-  integration-test-1:
-    docker:
-      - image: loadimpact/k6
-    steps:
-      - checkout
-      - k6io/test
 
 workflows:
   test-pack:
@@ -52,7 +44,8 @@ workflows:
   integration-test_deploy:
     when: << pipeline.parameters.run-integration-tests >>
     jobs:
-      - integration-test-1
+      - k6io/test:
+          script: data/test.js
       - orb-tools/dev-promote-prod-from-commit-subject:
           orb-name: k6io/test
           context: orb-publishing
@@ -60,7 +53,7 @@ workflows:
           fail-if-semver-not-indicated: true
           publish-version-tag: false
           requires:
-            - integration-test-1
+            - k6io/test
           filters:
             branches:
               only:

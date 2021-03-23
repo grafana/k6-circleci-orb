@@ -32,6 +32,7 @@ parameters:
     type: env_var_name
     default: K6_CLOUD_TOKEN
 steps:
+  - checkout
   - when:
       condition: <<parameters.cloud>>
       steps:
