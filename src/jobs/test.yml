@@ -1,8 +1,13 @@
 description: >
   Run a k6 test
 docker:
-  - image: loadimpact/k6:latest
+  - image: loadimpact/k6:<< parameters.tag >>
 parameters:
+  tag:
+    description:
+      Allows for overriding the tag used to pick a docker image for the k6 test job.
+    type: string
+    default: latest
   arguments:
     description: >
       Any command-line arguments, or flags, that you would like to pass on to k6.
@@ -13,7 +18,7 @@ parameters:
     description: >
       The path to your test script, relative to the current working directory
     type: string
-    default: "script.js"
+    default: test.js
   cloud:
     description: >
       To run in the k6 cloud, provide your k6 cloud token as a secret to the input `token`.
@@ -22,13 +27,23 @@ parameters:
     default: false
   token:
     description: >
-      The API token used to run in the k6 cloud.
-      You can find yours at https://app.k6.io/account/api-token.
-    type: string
-    default: ''
+      The name of the environment variable containing the token used for accessing the
+      k6 cloud. You can find yours at https://app.k6.io/account/api-token.
+    type: env_var_name
+    default: K6_CLOUD_TOKEN
 steps:
-  - run-test:
-      arguments: <<parameters.arguments>>
-      script: <<parameters.script>>
-      cloud: <<parameters.cloud>>
-      token: <<parameters.token>>
+  - when:
+      condition: <<parameters.cloud>>
+      steps:
+        - run:
+            name: Execute cloud test
+            command: >
+              k6 cloud << parameters.script >> <<  parameters.arguments >>
+            environment:
+              K6_CLOUD_TOKEN: <<parameters.token>>
+  - unless:
+      condition: <<parameters.cloud>>
+      steps:
+        - run:
+            name: Local Execution
+            command: k6 run << parameters.script >> << parameters.arguments >>

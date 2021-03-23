@@ -1,0 +1,60 @@
+description: |
+    Run load tests and reliability tests using k6. This orb allows for running tests both locally on the runner and in the k6 cloud SaaS service.
+display:
+    home_url: https://k6.io
+    source_url: https://github.com/k6io/circleci-orb
+jobs:
+    test:
+        description: |
+            Run a k6 test
+        docker:
+            - image: loadimpact/k6:<< parameters.tag >>
+        parameters:
+            arguments:
+                default: ""
+                description: |
+                    Any command-line arguments, or flags, that you would like to pass on to k6. For a full list of options, see https://k6.io/docs/using-k6/options.
+                type: string
+            cloud:
+                default: false
+                description: |
+                    To run in the k6 cloud, provide your k6 cloud token as a secret to the input `token`. Dont have a k6 account yet? Go to https://k6.io/cloud and activate your free trial.
+                type: boolean
+            script:
+                default: test.js
+                description: |
+                    The path to your test script, relative to the current working directory
+                type: string
+            tag:
+                default: latest
+                description: Allows for overriding the tag used to pick a docker image for the k6 test job.
+                type: string
+            token:
+                default: K6_CLOUD_TOKEN
+                description: |
+                    The name of the environment variable containing the token used for accessing the k6 cloud. You can find yours at https://app.k6.io/account/api-token.
+                type: env_var_name
+        steps:
+            - when:
+                condition: <<parameters.cloud>>
+                steps:
+                    - run:
+                        command: |
+                            k6 cloud << parameters.script >> <<  parameters.arguments >>
+                        environment:
+                            K6_CLOUD_TOKEN: <<parameters.token>>
+                        name: Execute cloud test
+            - unless:
+                condition: <<parameters.cloud>>
+                steps:
+                    - run:
+                        command: k6 run << parameters.script >> << parameters.arguments >>
+                        name: Local Execution
+orbs:
+    k6io: k6io/test@dev:alpha
+version: 2.1
+workflows:
+    workflow:
+        jobs:
+            - k6io/test
+
