@@ -1,0 +1,13 @@
+description: |
+  Executes a test with arguments supplied to the k6 CLI. Any argument with either a CLI flag or an
+  environment variable can be used here. For a full list of options, see https://k6.io/docs/using-k6/options
+usage:
+  version: 2.1
+  orbs:
+    k6io: k6io/test@x.y # This version number refers to the version of the orb, not the version of k6
+  workflows:
+    load_test:
+      jobs:
+        - k6io/test:
+            script: tests/some-test.js
+            args: --env SOME_ENV_VAR=some-value --compatibility-mode=base

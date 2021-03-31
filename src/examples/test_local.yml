@@ -1,0 +1,11 @@
+description: |
+  Executes a k6 load test or reliability test on the currently used runner.
+usage:
+  version: 2.1
+  orbs:
+    k6io: k6io/test@x.y # This version number refers to the version of the orb, not the version of k6
+  workflows:
+    load_test:
+      jobs:
+        - k6io/test:
+            script: tests/api-stressing.js # defaults to test.js
