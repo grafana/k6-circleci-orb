@@ -3,7 +3,7 @@ description: |
 usage:
   version: 2.1
   orbs:
-    k6io: k6io/test@x.y # This version number refers to the version of the orb, not the version of k6
+    k6io: k6io/test@1.1.0 # This version number refers to the version of the orb, not the version of k6
   workflows:
     load_test:
       jobs:
