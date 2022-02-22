@@ -10,4 +10,4 @@ usage:
       jobs:
         - k6io/test:
             script: tests/some-test.js
-            args: --env SOME_ENV_VAR=some-value --compatibility-mode=base
+            arguments: --env SOME_ENV_VAR=some-value --compatibility-mode=base

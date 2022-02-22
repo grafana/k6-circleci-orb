@@ -34,16 +34,16 @@ parameters:
 steps:
   - checkout
   - when:
-      condition: <<parameters.cloud>>
+      condition: << parameters.cloud >>
       steps:
         - run:
             name: Execute cloud test
             command: >
-              k6 cloud << parameters.script >> <<  parameters.arguments >>
+              k6 cloud << parameters.script >> << parameters.arguments >>
             environment:
-              K6_CLOUD_TOKEN: <<parameters.token>>
+              K6_CLOUD_TOKEN: << parameters.token >>
   - unless:
-      condition: <<parameters.cloud>>
+      condition: << parameters.cloud >>
       steps:
         - run:
             name: Local Execution
