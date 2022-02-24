@@ -17,7 +17,7 @@ parameters:
       This value is automatically adjusted by the "trigger-integration-tests-workflow" job to correspond with the specific version created by the commit and should not be edited.
       A "dev:alpha" version must exist for the initial pipeline run.
     type: string
-    default: "1.1.1"
+    default: "1.0.0"
     # default: "dev:alpha"
 
 workflows:

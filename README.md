@@ -7,7 +7,6 @@ The easiest way to integrate performance tests in your CircleCI pipeline.
 
 </div>
 
-
 ## Resources
 
 - [CircleCI Orb Registry Page](https://circleci.com/orbs/registry/orb/grafana/k6-circleci-orb) - The official registry page of this orb for all versions, executors, commands, and jobs described.
