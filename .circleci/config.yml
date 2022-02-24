@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  k6io: k6io/test@<< pipeline.parameters.dev-orb-version >>
+  grafana: grafana/test@<< pipeline.parameters.dev-orb-version >>
   orb-tools: circleci/orb-tools@10.0
   # bats: circleci/bats@1.0
   # shellcheck: circleci/shellcheck@2.0
@@ -30,7 +30,7 @@ workflows:
       #    dir: ./src/scripts
       #    exclude: SC2148
       - orb-tools/publish-dev:
-          orb-name: k6io/test
+          orb-name: grafana/test
           context: orb-publishing
           requires:
             - orb-tools/lint
@@ -45,16 +45,16 @@ workflows:
   integration-test_deploy:
     when: << pipeline.parameters.run-integration-tests >>
     jobs:
-      - k6io/test:
+      - grafana/test:
           script: data/test.js
       - orb-tools/dev-promote-prod-from-commit-subject:
-          orb-name: k6io/test
+          orb-name: grafana/test
           context: orb-publishing
           add-pr-comment: false
           fail-if-semver-not-indicated: true
           publish-version-tag: false
           requires:
-            - k6io/test
+            - grafana/test
           filters:
             branches:
               only:
