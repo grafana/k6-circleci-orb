@@ -32,6 +32,7 @@ workflows:
       - orb-tools/publish-dev:
           orb-name: grafana/k6
           context: orb-publishing
+          publish-token-variable: CIRCLE_TOKEN_ORB
           requires:
             - orb-tools/lint
             - orb-tools/pack
@@ -39,6 +40,7 @@ workflows:
       - orb-tools/trigger-integration-tests-workflow:
           name: trigger-integration-dev
           context: orb-publishing
+          token-variable: CIRCLE_TOKEN_ORB
           requires:
             - orb-tools/publish-dev
 
@@ -53,6 +55,7 @@ workflows:
           add-pr-comment: false
           fail-if-semver-not-indicated: true
           publish-version-tag: false
+          publish-token-variable: CIRCLE_TOKEN_ORB
           requires:
             - grafana/k6
           filters:
