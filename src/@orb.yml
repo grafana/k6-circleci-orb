@@ -6,4 +6,4 @@ description: >
 
 display:
   home_url: https://k6.io
-  source_url: https://github.com/k6io/circleci-orb
+  source_url: https://github.com/grafana/k6-circleci-orb
