@@ -21,8 +21,8 @@ parameters:
     default: test.js
   cloud:
     description: >
-      To run in the k6 cloud, provide your k6 cloud token as a secret to the input `token`.
-      Dont have a k6 account yet? Go to https://k6.io/cloud and activate your free trial.
+      Whether it runs the k6 test in the k6 Cloud. 
+      If true, set your K6_CLOUD_TOKEN on the CircleCI environment variables.
     type: boolean
     default: false
 steps:

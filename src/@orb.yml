@@ -1,8 +1,8 @@
 version: 2.1
 
 description: >
-  Run load tests and reliability tests using k6. This orb allows for running tests
-  both locally on the runner and in the k6 cloud SaaS service.
+  Run load tests and reliability tests using k6. This orb allows for running k6 tests
+  locally on the runner and in the k6 Cloud.
 
 display:
   home_url: https://k6.io
