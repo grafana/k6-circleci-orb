@@ -1,5 +1,5 @@
 description: |
-  Executes a k6 test in the k6 Cloud. 
+  Executes a k6 test in the k6 Cloud.
   Ensure you set your K6_CLOUD_TOKEN on the CircleCI environment variables.
 usage:
   version: 2.1
