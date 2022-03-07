@@ -25,12 +25,6 @@ parameters:
       Dont have a k6 account yet? Go to https://k6.io/cloud and activate your free trial.
     type: boolean
     default: false
-  token:
-    description: >
-      The name of the environment variable containing the token used for accessing the
-      k6 cloud. You can find yours at https://app.k6.io/account/api-token.
-    type: string
-    default: K6_CLOUD_TOKEN
 steps:
   - checkout
   - when:
