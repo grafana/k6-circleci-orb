@@ -21,7 +21,7 @@ parameters:
     default: test.js
   cloud:
     description: >
-      Whether it runs the k6 test in the k6 Cloud. 
+      Whether it runs the k6 test in the k6 Cloud.
       If true, set your K6_CLOUD_TOKEN on the CircleCI environment variables.
     type: boolean
     default: false
