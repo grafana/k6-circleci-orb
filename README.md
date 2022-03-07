@@ -37,4 +37,4 @@ For further questions/comments about this or other orbs, visit the Orb Category 
 
 ### Setting Up Cloud execution
 
-Ensure that you have set up your `K6_CLOUD_TOKEN` environment variable on the CircleCI environment variables page, this will ensure that k6 will identify the variable as it is used to upload the excuted tests to the k6 cloud dashboard. You can read more about it [here](https://k6.io/docs/cloud/creating-and-running-a-test/cloud-tests-from-the-cli/).
+Ensure that you have set up your `K6_CLOUD_TOKEN` environment variable on the CircleCI environment variables page, this will ensure that k6 will identify the variable as it is used to upload the excuted tests to the k6 cloud dashboard. You can read more about it in the documentation [here](https://k6.io/docs/cloud/creating-and-running-a-test/cloud-tests-from-the-cli/).
