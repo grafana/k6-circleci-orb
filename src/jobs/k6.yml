@@ -40,3 +40,5 @@ steps:
         - run:
             name: Local Execution
             command: k6 run << parameters.script >> << parameters.arguments >>
+        - store_artifacts:
+            path: /tmp/artifacts
