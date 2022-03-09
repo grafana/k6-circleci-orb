@@ -13,6 +13,8 @@ The easiest way to integrate performance tests in your CircleCI pipeline.
 
 - [Tutorial](https://circleci.com/orbs/registry/orb/grafana/k6-circleci-orb) 
 
+- [Examples](https://github.com/grafana/k6-example-circleci-orb) 
+
 
 ### How to Contribute
 
